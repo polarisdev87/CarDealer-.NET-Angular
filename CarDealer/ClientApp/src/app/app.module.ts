@@ -20,7 +20,7 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: NavMenuComponent, pathMatch: 'full' }
+      { path: '', component: HomeComponent, pathMatch: 'full' }
     ])
   ],
   providers: [],
