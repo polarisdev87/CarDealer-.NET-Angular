@@ -9,5 +9,15 @@ namespace CarDealer.Infrastructure
     public class CarDealerDbContext : DbContext
     {
 
+        public CarDealerDbContext(DbContextOptions<CarDealerDbContext> options)
+            : base(options)
+        {
+
+        }
+
+
+
+   
+
     }
 }
