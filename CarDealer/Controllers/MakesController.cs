@@ -30,7 +30,7 @@ namespace CarDealer.Controllers
         [HttpGet("/api/makes")]
         public async Task<IEnumerable<MakeDto>> GetMakes()
         {
-            var makes = await context.Makes.ToListAsync();
+            var makes = await context.Makes.Include(m => m.Models).ToListAsync();
 
             return mapper.Map<List<Make>, List<MakeDto>>(makes);
         }

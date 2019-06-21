@@ -12,12 +12,12 @@ namespace CarDealer.Core.Dto
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Model> Models { get; set; }
+        public ICollection<ModelDto> Models { get; set; }
 
 
         public MakeDto()
         {
-            Models = new Collection<Model>();
+            Models = new Collection<ModelDto>();
         }
 
     }
