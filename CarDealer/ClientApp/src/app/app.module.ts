@@ -22,7 +22,8 @@ import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' }
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'vehicles/new', component: VehicleFormComponent }
     ])
   ],
   providers: [],
