@@ -11,6 +11,7 @@ namespace CarDealer.Infrastructure
     {
 
         public DbSet<Make> Makes { get; set; }
+        public DbSet<Model> Models { get; set; }
 
 
         public CarDealerDbContext(DbContextOptions<CarDealerDbContext> options)
