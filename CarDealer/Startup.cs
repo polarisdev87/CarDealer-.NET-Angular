@@ -25,7 +25,7 @@ namespace CarDealer
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
 
-            services.AddDbContext<CarDealerDbContext>(options => options.UseSqlServer(""));
+            services.AddDbContext<CarDealerDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:Default"]));
 
 
             // In production, the Angular files will be served from this directory
