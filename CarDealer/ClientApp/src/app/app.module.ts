@@ -7,12 +7,14 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavigationComponent
+    NavigationComponent,
+    VehicleFormComponent
     
   ],
   imports: [
