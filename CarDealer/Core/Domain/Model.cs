@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -18,5 +19,14 @@ namespace CarDealer.Core.Domain
 
         public Make Make { get; set; }
         public int MakeId { get; set; }
+
+
+        public ICollection<Feature> Features { get; set; }
+
+
+        public Model()
+        {
+            Features = new Collection<Feature>();
+        }
     }
 }
