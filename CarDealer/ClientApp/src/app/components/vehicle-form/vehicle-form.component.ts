@@ -1,5 +1,6 @@
 import { MakeService } from './../../services/make.service';
 import { Component, OnInit } from '@angular/core';
+import { FeatureService } from '../../services/feature.service';
 
 @Component({
   selector: 'app-vehicle-form',
@@ -12,7 +13,9 @@ export class VehicleFormComponent implements OnInit {
   models: any[];
   vehicle: any = {};
 
-  constructor(private makeService: MakeService) { }
+  constructor(
+    private makeService: MakeService, 
+    private featureService: FeatureService) { }
 
   ngOnInit() {
 
