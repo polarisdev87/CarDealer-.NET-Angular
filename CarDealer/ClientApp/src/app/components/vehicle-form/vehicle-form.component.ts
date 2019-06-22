@@ -11,6 +11,7 @@ export class VehicleFormComponent implements OnInit {
 
   makes: any[];
   models: any[];
+  features: any[];
   vehicle: any = {};
 
   constructor(
@@ -21,6 +22,11 @@ export class VehicleFormComponent implements OnInit {
 
     this.makeService.getMakes().subscribe(
       makes => this.makes = makes);
+
+    this.featureService.getFeatures().subscribe(
+      features => this.features = features
+    );
+
   }
 
   onMakeChange() {
