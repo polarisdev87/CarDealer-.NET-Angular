@@ -15,6 +15,7 @@ using System.Threading.Tasks;
         {
             CreateMap<Make, MakeDto>();
             CreateMap<Model, ModelDto>();
+            CreateMap<Feature, FeatureDto>();
         }
 
     }
