@@ -1,6 +1,5 @@
 import { VehicleService } from '../../services/vehicle.service';
 import { Component, OnInit } from '@angular/core';
-import { FeatureService } from '../../services/feature.service';
 
 @Component({
   selector: 'app-vehicle-form',
