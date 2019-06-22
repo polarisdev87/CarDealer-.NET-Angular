@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { MakeService } from './services/make.service';
+import { VehicleService } from './services/vehicle.service';
 import { FeatureService } from './services/feature.service';
 
 import { AppComponent } from './app.component';
@@ -33,7 +33,7 @@ import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.com
     ])
   ],
   providers: [
-    MakeService,
+    VehicleService,
     FeatureService
   ],
   bootstrap: [AppComponent]

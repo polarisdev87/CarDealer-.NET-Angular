@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class MakeService {
+export class VehicleService {
 
   constructor(private http: Http) { }
 
