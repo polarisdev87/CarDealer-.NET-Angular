@@ -15,8 +15,5 @@ namespace CarDealer.Core.Domain
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
-
-        public Model Model { get; set; }
-        public int ModelId { get; set; }
     }
 }
