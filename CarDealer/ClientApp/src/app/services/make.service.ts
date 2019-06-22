@@ -6,4 +6,8 @@ export class MakeService {
 
   constructor(private http: Http) { }
 
+  getMakes() {
+    
+  }
+
 }
