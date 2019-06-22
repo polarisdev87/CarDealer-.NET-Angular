@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { VehicleService } from './services/vehicle.service';
-import { FeatureService } from './services/feature.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -33,8 +32,7 @@ import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.com
     ])
   ],
   providers: [
-    VehicleService,
-    FeatureService
+    VehicleService
   ],
   bootstrap: [AppComponent]
 })
