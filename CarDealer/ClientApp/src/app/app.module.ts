@@ -6,11 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MakeService } from './services/make.service';
+import { FeatureService } from './services/feature.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.com
     ])
   ],
   providers: [
-    MakeService
+    MakeService,
+    FeatureService
   ],
   bootstrap: [AppComponent]
 })
