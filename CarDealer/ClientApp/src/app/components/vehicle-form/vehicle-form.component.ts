@@ -19,8 +19,10 @@ export class VehicleFormComponent implements OnInit {
         this.makes = makes;
         console.log("MAKES", this.makes);
       });
-      
+  }
 
+  onMakeChange() {
+    
   }
 
 }
