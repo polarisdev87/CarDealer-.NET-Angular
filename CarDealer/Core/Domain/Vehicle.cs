@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CarDealer.Core.Domain
 {
-    public class Vehicle
+    public class Vehicle : BaseEntity
     {
     }
 }
