@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 namespace CarDealer.Core.Domain
 {
     [Table("Models")]
-    public class Model
+    public class Model : BaseEntity
     {
-        public int Id { get; set; }
-
         [Required]
         [StringLength(255)]
         public string Name { get; set; }

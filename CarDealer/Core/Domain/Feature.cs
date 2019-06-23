@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 namespace CarDealer.Core.Domain
 {
     [Table("Features")]
-    public class Feature
+    public class Feature : BaseEntity
     {
-        public int Id { get; set; }
-
         [Required]
         [StringLength(255)]
         public string Name { get; set; }

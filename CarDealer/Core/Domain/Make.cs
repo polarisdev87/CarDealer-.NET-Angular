@@ -9,10 +9,8 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CarDealer.Core.Domain
 {
-    public class Make
+    public class Make : BaseEntity
     {
-        public int Id { get; set; }
-
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
