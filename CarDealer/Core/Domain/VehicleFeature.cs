@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CarDealer.Core.Domain
 {
+    [Table("VehicleFeatures")]
     public class VehicleFeature
     {
         public int VehicleId { get; set; }

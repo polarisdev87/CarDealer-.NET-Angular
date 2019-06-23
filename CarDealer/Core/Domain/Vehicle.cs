@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CarDealer.Core.Domain
 {
+    [Table("Vehicles")]
     public class Vehicle : BaseEntity
     {
         public int ModelId { get; set; }
