@@ -7,6 +7,7 @@ using CarDealer.Core.Domain;
 using CarDealer.Core.Dto;
 using CarDealer.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarDealer.Controllers
 {
@@ -61,7 +62,7 @@ namespace CarDealer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var vehicle = await context.Vehicles.FindAsync(id);
+            var vehicle = await context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
 
             mapper.Map(vehicleDto, vehicle);
 
