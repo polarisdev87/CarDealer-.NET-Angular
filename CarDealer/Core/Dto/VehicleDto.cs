@@ -15,7 +15,7 @@ namespace CarDealer.Core.Dto
 
         public bool IsRegistered { get; set; }
 
-        
+        [Required]
         public ContactDto Contact { get; set; }
 
         public ICollection<int> Features { get; set; }
