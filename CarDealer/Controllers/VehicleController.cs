@@ -52,5 +52,11 @@ namespace CarDealer.Controllers
 
             return Ok(result);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateVehicle(int id, [FromBody] VehicleDto vehicleDto)
+        {
+
+        }
     }
 }
