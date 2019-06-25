@@ -33,9 +33,17 @@ namespace CarDealer.Controllers
                 return BadRequest(ModelState);
             }
 
+            var model = await context.Models.FindAsync(vehicleDto.ModelId);
+            if (model == null)
+            {
+                ModelState.AddModelError("ModelId", "Invalid ModelId");
+                return BadRequest(ModelState);
+            }
+
+
             var vehicle = mapper.Map<VehicleDto, Vehicle>(vehicleDto);
 
-            vehicle.LastUpdate = DateTime.Now;
+            // vehicle.LastUpdate = DateTime.Now;
 
             context.Vehicles.Add(vehicle);
             await context.SaveChangesAsync();
