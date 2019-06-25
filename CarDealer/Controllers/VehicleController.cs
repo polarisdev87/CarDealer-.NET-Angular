@@ -25,11 +25,16 @@ namespace CarDealer.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateVehicle([FromBody] VehicleDto vehicleDto)
+        public async Task<IActionResult> CreateVehicle([FromBody] VehicleDto vehicleDto)
         {
             var vehicle = mapper.Map<VehicleDto, Vehicle>(vehicleDto);
 
-            return Ok(vehicle);
+            context.Vehicles.Add(vehicle);
+            await context.SaveChangesAsync();
+
+            var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
+
+            return Ok(result);
         }
     }
 }
