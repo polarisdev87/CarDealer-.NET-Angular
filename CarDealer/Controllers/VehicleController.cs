@@ -72,5 +72,14 @@ namespace CarDealer.Controllers
 
             return Ok(result);
         }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteVehicle(int id)
+        {
+
+            var vehicle = await context.Vehicles.FindAsync(id);
+
+        }
     }
 }
