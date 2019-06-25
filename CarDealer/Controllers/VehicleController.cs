@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarDealer.Controllers
 {
+    [Route("/api/vehicles")]
     public class VehicleController : Controller
     {
-        public IActionResult Index()
+
+        [HttpPost]
+        public IActionResult CreateVehicle()
         {
-            return View();
+
         }
     }
 }
