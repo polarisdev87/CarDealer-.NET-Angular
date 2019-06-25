@@ -33,7 +33,24 @@ using System.Threading.Tasks;
                 .ForMember(v => v.ContactPhone, opt => opt.MapFrom(vdto => vdto.Contact.Phone))
 
                 .ForMember(v => v.Features,
-                    opt => opt.Ignore());
+                    opt => opt.Ignore())
+                
+                .AfterMap((vdto, v) =>
+                {
+                    var removedFeatures = new List<VehicleFeature>();
+                    foreach (var f in v.Features)
+                    {
+                        if (vdto.Features.Contains(f.FeatureId))
+                        {
+                            removedFeatures.Add(f);
+                        }
+                    }
+
+                    foreach (var rf in removedFeatures)
+                    {
+                        v.Features.Remove(rf);
+                    }
+                });
 
         }
 
