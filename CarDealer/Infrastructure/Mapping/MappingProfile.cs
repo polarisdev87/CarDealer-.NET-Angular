@@ -27,6 +27,7 @@ using System.Threading.Tasks;
 
             // Dto to Domain
             CreateMap<VehicleDto, Vehicle>()
+                .ForMember(v => v.Id, opt => opt.Ignore())
                 .ForMember(v => v.ContactName, opt => opt.MapFrom(vdto => vdto.Contact.Name))
                 .ForMember(v => v.ContactEmail, opt => opt.MapFrom(vdto => vdto.Contact.Email))
                 .ForMember(v => v.ContactPhone, opt => opt.MapFrom(vdto => vdto.Contact.Phone))
