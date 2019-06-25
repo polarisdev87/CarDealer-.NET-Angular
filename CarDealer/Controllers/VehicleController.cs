@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarDealer.Core.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarDealer.Controllers
@@ -11,9 +12,9 @@ namespace CarDealer.Controllers
     {
 
         [HttpPost]
-        public IActionResult CreateVehicle()
+        public IActionResult CreateVehicle([FromBody] VehicleDto vehicleDto)
         {
-
+            return Ok(vehicleDto);
         }
     }
 }
