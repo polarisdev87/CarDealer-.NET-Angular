@@ -38,14 +38,7 @@ using System.Threading.Tasks;
                 .AfterMap((vdto, v) =>
                 {
                     // Remove
-                    var removedFeatures = new List<VehicleFeature>();
-                    foreach (var f in v.Features)
-                    {
-                        if (vdto.Features.Contains(f.FeatureId))
-                        {
-                            removedFeatures.Add(f);
-                        }
-                    }
+                    var removedFeatures = v.Features.Where(f => !vdto.Features.Contains(f.FeatureId));
 
                     foreach (var rf in removedFeatures)
                     {
