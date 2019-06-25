@@ -29,6 +29,8 @@ namespace CarDealer.Controllers
         {
             var vehicle = mapper.Map<VehicleDto, Vehicle>(vehicleDto);
 
+            vehicle.LastUpdate = DateTime.Now;
+
             context.Vehicles.Add(vehicle);
             await context.SaveChangesAsync();
 
