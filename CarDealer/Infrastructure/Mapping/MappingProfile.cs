@@ -33,7 +33,7 @@ using System.Threading.Tasks;
                 .ForMember(v => v.ContactPhone, opt => opt.MapFrom(vdto => vdto.Contact.Phone))
 
                 .ForMember(v => v.Features,
-                    opt => opt.MapFrom(vehdto => vehdto.Features.Select(id => new VehicleFeature { FeatureId = id })));
+                    opt => opt.Ignore());
 
         }
 
