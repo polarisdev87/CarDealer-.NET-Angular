@@ -80,6 +80,12 @@ namespace CarDealer.Controllers
 
             var vehicle = await context.Vehicles.FindAsync(id);
 
+            context.Remove(vehicle);
+
+            await context.SaveChangesAsync();
+
+            return Ok(id);
+
         }
     }
 }
