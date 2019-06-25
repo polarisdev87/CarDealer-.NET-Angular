@@ -37,6 +37,7 @@ using System.Threading.Tasks;
                 
                 .AfterMap((vdto, v) =>
                 {
+                    // Remove
                     var removedFeatures = new List<VehicleFeature>();
                     foreach (var f in v.Features)
                     {
@@ -50,6 +51,18 @@ using System.Threading.Tasks;
                     {
                         v.Features.Remove(rf);
                     }
+
+                    // Add
+                    foreach (var id in vdto.Features)
+                    {
+                        if (!v.Features.Any(f => f.FeatureId == id))
+                        {
+                            v.Features.Add(new VehicleFeature { FeatureId = id});
+                        }
+                    }
+
+
+
                 });
 
         }
