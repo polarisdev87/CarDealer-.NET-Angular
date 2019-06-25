@@ -48,11 +48,11 @@ using System.Threading.Tasks;
 
 
                     // Add
-                    var addedFeatures = vdto.Features.Where(id => !v.Features.Any(f => f.FeatureId == id));
+                    var addedFeatures = vdto.Features.Where(id => !v.Features.Any(f => f.FeatureId == id)).Select(id => new VehicleFeature { FeatureId = id});
 
-                    foreach (var id in addedFeatures)
+                    foreach (var af in addedFeatures)
                     {
-                        v.Features.Add(new VehicleFeature { FeatureId = id});
+                        v.Features.Add(af);
                     }
  
 
