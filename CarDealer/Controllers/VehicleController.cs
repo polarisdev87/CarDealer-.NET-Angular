@@ -56,7 +56,14 @@ namespace CarDealer.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateVehicle(int id, [FromBody] VehicleDto vehicleDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            var vehicle = await context.Vehicles.FindAsync(id);
+
+            mapper.Map(vehicleDto, vehicle);
         }
     }
 }
