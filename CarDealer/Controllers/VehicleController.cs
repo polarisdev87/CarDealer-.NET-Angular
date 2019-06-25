@@ -25,6 +25,23 @@ namespace CarDealer.Controllers
 
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetVehicle(int id)
+        {
+            var vehicle = await context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            var vehicleDto = mapper.Map<Vehicle, VehicleDto>(vehicle);
+
+            return Ok(vehicleDto);
+        }
+
+
+
         [HttpPost]
         public async Task<IActionResult> CreateVehicle([FromBody] VehicleDto vehicleDto)
         {
