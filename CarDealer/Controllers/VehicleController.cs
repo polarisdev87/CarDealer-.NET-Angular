@@ -27,6 +27,12 @@ namespace CarDealer.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateVehicle([FromBody] VehicleDto vehicleDto)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var vehicle = mapper.Map<VehicleDto, Vehicle>(vehicleDto);
 
             vehicle.LastUpdate = DateTime.Now;
