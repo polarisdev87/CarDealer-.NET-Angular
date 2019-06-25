@@ -64,6 +64,11 @@ namespace CarDealer.Controllers
 
             var vehicle = await context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
 
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
             mapper.Map(vehicleDto, vehicle);
 
             await context.SaveChangesAsync();
@@ -79,6 +84,11 @@ namespace CarDealer.Controllers
         {
 
             var vehicle = await context.Vehicles.FindAsync(id);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
 
             context.Remove(vehicle);
 
