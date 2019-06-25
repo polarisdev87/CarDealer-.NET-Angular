@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CarDealer.Core.Domain;
 using CarDealer.Core.Dto;
 using CarDealer.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,9 @@ namespace CarDealer.Controllers
         [HttpPost]
         public IActionResult CreateVehicle([FromBody] VehicleDto vehicleDto)
         {
-            return Ok(vehicleDto);
+            var vehicle = mapper.Map<VehicleDto, Vehicle>(vehicleDto);
+
+            return Ok(vehicle);
         }
     }
 }
