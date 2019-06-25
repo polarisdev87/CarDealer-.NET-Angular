@@ -23,7 +23,10 @@ using System.Threading.Tasks;
             CreateMap<VehicleDto, Vehicle>()
                 .ForMember(v => v.ContactName, opt => opt.MapFrom(vehdto => vehdto.Contact.Name))
                 .ForMember(v => v.ContactEmail, opt => opt.MapFrom(vehdto => vehdto.Contact.Email))
-                .ForMember(v => v.ContactPhone, opt => opt.MapFrom(vehdto => vehdto.Contact.Phone));
+                .ForMember(v => v.ContactPhone, opt => opt.MapFrom(vehdto => vehdto.Contact.Phone))
+
+                .ForMember(v => v.Features,
+                    opt => opt.MapFrom(vehdto => vehdto.Features.Select(id => new VehicleFeature { FeatureId = id })));
 
         }
 
