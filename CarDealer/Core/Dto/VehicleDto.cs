@@ -23,12 +23,12 @@ namespace CarDealer.Core.Dto
 
         public DateTime LastUpdate { get; set; }
 
-        public ICollection<FeatureDto> Features { get; set; }
+        public ICollection<KeyValuePairDto> Features { get; set; }
 
 
         public VehicleDto()
         {
-            Features = new Collection<FeatureDto>();
+            Features = new Collection<KeyValuePairDto>();
         }
 
     }
