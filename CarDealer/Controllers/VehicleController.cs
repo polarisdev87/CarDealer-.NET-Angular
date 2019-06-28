@@ -69,13 +69,7 @@ namespace CarDealer.Controllers
             context.Vehicles.Add(vehicle);
             await context.SaveChangesAsync();
 
-            vehicle = await context.Vehicles
-                .Include(v => v.Features)
-                .ThenInclude(vf => vf.Feature)
-                .Include(v => v.Model)
-                .ThenInclude(m => m.Make)
-
-                .SingleOrDefaultAsync(v => v.Id == vehicle.Id);
+            vehicle = await _repository.GetById(vehicle.Id);
 
             var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
 
@@ -90,13 +84,7 @@ namespace CarDealer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var vehicle = await context.Vehicles
-                .Include(v => v.Features)
-                .ThenInclude(vf => vf.Feature)
-                .Include(v => v.Model)
-                .ThenInclude(m => m.Make)
-
-                .SingleOrDefaultAsync(v => v.Id == id);
+            var vehicle = await _repository.GetById(id);
 
             if (vehicle == null)
             {
