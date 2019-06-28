@@ -16,8 +16,14 @@ namespace CarDealer.Infrastructure.Repositories
         {
         }
 
-        public override async Task<Vehicle> GetById(int id)
+        public async Task<Vehicle> GetById(int id, bool includeRelated = true)
         {
+            if (!includeRelated)
+            {
+                return await _context.Vehicles.FindAsync(id);
+            }
+
+
             return await _context.Vehicles
                 .Include(v => v.Features)
                 .ThenInclude(vf => vf.Feature)
