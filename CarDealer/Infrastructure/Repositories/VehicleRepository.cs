@@ -18,7 +18,13 @@ namespace CarDealer.Infrastructure.Repositories
 
         public override async Task<Vehicle> GetById(int id)
         {
-           
+            return await _context.Vehicles
+                .Include(v => v.Features)
+                .ThenInclude(vf => vf.Feature)
+                .Include(v => v.Model)
+                .ThenInclude(m => m.Make)
+
+                .SingleOrDefaultAsync(v => v.Id == id);
         }
 
     }
