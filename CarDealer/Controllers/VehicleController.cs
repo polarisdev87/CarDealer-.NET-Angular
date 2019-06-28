@@ -35,7 +35,7 @@ namespace CarDealer.Controllers
                 return NotFound();
             }
 
-            var vehicleDto = mapper.Map<Vehicle, VehicleDto>(vehicle);
+            var vehicleDto = mapper.Map<Vehicle, SaveVehicleDto>(vehicle);
 
             return Ok(vehicleDto);
         }
@@ -43,7 +43,7 @@ namespace CarDealer.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateVehicle([FromBody] VehicleDto vehicleDto)
+        public async Task<IActionResult> CreateVehicle([FromBody] SaveVehicleDto saveVehicleDto)
         {
 
             if (!ModelState.IsValid)
@@ -51,7 +51,7 @@ namespace CarDealer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var model = await context.Models.FindAsync(vehicleDto.ModelId);
+            var model = await context.Models.FindAsync(saveVehicleDto.ModelId);
             if (model == null)
             {
                 ModelState.AddModelError("ModelId", "Invalid ModelId");
@@ -59,20 +59,20 @@ namespace CarDealer.Controllers
             }
 
 
-            var vehicle = mapper.Map<VehicleDto, Vehicle>(vehicleDto);
+            var vehicle = mapper.Map<SaveVehicleDto, Vehicle>(saveVehicleDto);
 
             // vehicle.LastUpdate = DateTime.Now;
 
             context.Vehicles.Add(vehicle);
             await context.SaveChangesAsync();
 
-            var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
+            var result = mapper.Map<Vehicle, SaveVehicleDto>(vehicle);
 
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateVehicle(int id, [FromBody] VehicleDto vehicleDto)
+        public async Task<IActionResult> UpdateVehicle(int id, [FromBody] SaveVehicleDto saveVehicleDto)
         {
             if (!ModelState.IsValid)
             {
@@ -86,11 +86,11 @@ namespace CarDealer.Controllers
                 return NotFound();
             }
 
-            mapper.Map(vehicleDto, vehicle);
+            mapper.Map(saveVehicleDto, vehicle);
 
             await context.SaveChangesAsync();
 
-            var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
+            var result = mapper.Map<Vehicle, SaveVehicleDto>(vehicle);
 
             return Ok(result);
         }

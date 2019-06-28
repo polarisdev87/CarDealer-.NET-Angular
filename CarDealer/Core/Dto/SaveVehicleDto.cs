@@ -8,7 +8,7 @@ using CarDealer.Core.Domain;
 
 namespace CarDealer.Core.Dto
 {
-    public class VehicleDto
+    public class SaveVehicleDto
     {
         public int Id { get; set; }
         public int ModelId { get; set; }
@@ -20,7 +20,7 @@ namespace CarDealer.Core.Dto
 
         public ICollection<int> Features { get; set; }
 
-        public VehicleDto()
+        public SaveVehicleDto()
         {
             Features = new Collection<int>();
         }
