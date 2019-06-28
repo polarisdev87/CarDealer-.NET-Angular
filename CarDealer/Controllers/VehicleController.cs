@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CarDealer.Core.Domain;
 using CarDealer.Core.Dto;
+using CarDealer.Core.Repositories;
 using CarDealer.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,11 @@ namespace CarDealer.Controllers
     {
         private readonly CarDealerDbContext context;
         private readonly IMapper mapper;
+        private IVehicleRepository _repository;
 
-        public VehicleController(CarDealerDbContext context, IMapper mapper)
+        public VehicleController(CarDealerDbContext context, IMapper mapper, IVehicleRepository repository)
         {
+            _repository = repository;
 
             this.mapper = mapper;
             this.context = context;
