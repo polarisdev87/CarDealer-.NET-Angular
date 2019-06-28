@@ -15,7 +15,7 @@ using System.Threading.Tasks;
         {
             // Domain to Dto
             CreateMap<Make, MakeDto>();
-            CreateMap<Model, ModelDto>();
+            CreateMap<Model, KeyValuePairDto>();
             CreateMap<Feature, KeyValuePairDto>();
             CreateMap<Vehicle, SaveVehicleDto>()
                 .ForMember(vdto => vdto.Contact,

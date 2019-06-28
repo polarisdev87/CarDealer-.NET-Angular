@@ -13,7 +13,7 @@ namespace CarDealer.Core.Dto
 
         public int Id { get; set; }
 
-        public ModelDto Model { get; set; }
+        public KeyValuePairDto Model { get; set; }
         public MakeDto Make { get; set; }
 
         public bool IsRegistered { get; set; }

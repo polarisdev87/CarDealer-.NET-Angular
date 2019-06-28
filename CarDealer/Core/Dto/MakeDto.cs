@@ -11,12 +11,12 @@ namespace CarDealer.Core.Dto
     public class MakeDto : KeyValuePairDto
     {
        
-        public ICollection<ModelDto> Models { get; set; }
+        public ICollection<KeyValuePairDto> Models { get; set; }
 
 
         public MakeDto()
         {
-            Models = new Collection<ModelDto>();
+            Models = new Collection<KeyValuePairDto>();
         }
 
     }
