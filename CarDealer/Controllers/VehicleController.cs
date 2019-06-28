@@ -28,14 +28,17 @@ namespace CarDealer.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVehicle(int id)
         {
-            var vehicle = await context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
+            var vehicle = await context.Vehicles.Include(v => v.Features)
+                    .ThenInclude(vf => vf.Feature)
+                    .Include(v => v.Model)
+                .SingleOrDefaultAsync(v => v.Id == id);
 
             if (vehicle == null)
             {
                 return NotFound();
             }
 
-            var vehicleDto = mapper.Map<Vehicle, SaveVehicleDto>(vehicle);
+            var vehicleDto = mapper.Map<Vehicle, VehicleDto>(vehicle);
 
             return Ok(vehicleDto);
         }
