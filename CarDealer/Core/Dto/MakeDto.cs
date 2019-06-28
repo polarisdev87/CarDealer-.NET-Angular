@@ -8,10 +8,9 @@ using CarDealer.Core.Domain;
 
 namespace CarDealer.Core.Dto
 {
-    public class MakeDto
+    public class MakeDto : KeyValuePairDto
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+       
         public ICollection<ModelDto> Models { get; set; }
 
 
