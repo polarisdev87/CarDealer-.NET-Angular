@@ -93,7 +93,13 @@ namespace CarDealer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var vehicle = await context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
+            var vehicle = await context.Vehicles
+                .Include(v => v.Features)
+                .ThenInclude(vf => vf.Feature)
+                .Include(v => v.Model)
+                .ThenInclude(m => m.Make)
+
+                .SingleOrDefaultAsync(v => v.Id == id);
 
             if (vehicle == null)
             {
@@ -104,7 +110,7 @@ namespace CarDealer.Controllers
 
             await context.SaveChangesAsync();
 
-            var result = mapper.Map<Vehicle, SaveVehicleDto>(vehicle);
+            var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
 
             return Ok(result);
         }
