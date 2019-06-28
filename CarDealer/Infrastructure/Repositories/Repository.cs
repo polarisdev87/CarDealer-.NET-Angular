@@ -9,7 +9,7 @@ namespace CarDealer.Infrastructure.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly CarDealerDbContext _context;
+        public readonly CarDealerDbContext _context;
 
         public Repository(CarDealerDbContext context)
         {
@@ -23,7 +23,7 @@ namespace CarDealer.Infrastructure.Repositories
             return _context.Set<TEntity>().AsNoTracking();
         }
 
-        public async Task<TEntity> GetById(int id)
+        public virtual async Task<TEntity> GetById(int id)
         {
             return await _context.Set<TEntity>().FindAsync(id);
         }
