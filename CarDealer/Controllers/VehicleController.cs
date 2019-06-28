@@ -31,7 +31,7 @@ namespace CarDealer.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVehicle(int id)
         {
-            var vehicle = await _repository.GetById(id);
+            var vehicle = await _repository.GetById(id, true);
 
             if (vehicle == null)
             {
@@ -69,7 +69,7 @@ namespace CarDealer.Controllers
 
             await context.SaveChangesAsync();
 
-            vehicle = await _repository.GetById(vehicle.Id);
+            vehicle = await _repository.GetById(vehicle.Id, true);
 
             var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
 
@@ -84,7 +84,7 @@ namespace CarDealer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var vehicle = await _repository.GetById(id);
+            var vehicle = await _repository.GetById(id, true);
 
             if (vehicle == null)
             {
@@ -105,14 +105,14 @@ namespace CarDealer.Controllers
         public async Task<IActionResult> DeleteVehicle(int id)
         {
 
-            var vehicle = await context.Vehicles.FindAsync(id);
+            var vehicle = await _repository.GetById(id);
 
             if (vehicle == null)
             {
                 return NotFound();
             }
 
-            _repository.Delete(vehicle);
+            _repository.Delete(vehicle.Id);
 
             await context.SaveChangesAsync();
 
