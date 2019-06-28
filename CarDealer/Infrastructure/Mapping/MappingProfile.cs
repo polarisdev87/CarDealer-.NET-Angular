@@ -28,6 +28,7 @@ using System.Threading.Tasks;
 
 
             CreateMap<Vehicle, VehicleDto>()
+                .ForMember(vr => vr.Make, opt => opt.MapFrom(v => v.Model.Make))
                 .ForMember(vdto => vdto.Contact,
                     opt => opt.MapFrom(v => new ContactDto
                         { Name = v.ContactName, Phone = v.ContactPhone, Email = v.ContactEmail }))
