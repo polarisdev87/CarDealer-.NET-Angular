@@ -25,6 +25,18 @@ using System.Threading.Tasks;
                 .ForMember(vdto => vdto.Features, opt => opt.MapFrom(v => v.Features.Select(vf => vf.FeatureId)));
 
 
+
+
+            CreateMap<Vehicle, VehicleDto>()
+                .ForMember(vdto => vdto.Contact,
+                    opt => opt.MapFrom(v => new ContactDto
+                        { Name = v.ContactName, Phone = v.ContactPhone, Email = v.ContactEmail }))
+
+                .ForMember(vdto => vdto.Features, opt => opt.MapFrom(v => v.Features.Select(vf => new FeatureDto{ Id = vf.Feature.Id, Name = vf.Feature.Name })));
+
+
+
+
             // Dto to Domain
             CreateMap<SaveVehicleDto, Vehicle>()
                 .ForMember(v => v.Id, opt => opt.Ignore())
