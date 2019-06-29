@@ -17,11 +17,11 @@ namespace CarDealer.Controllers
     {
         private readonly CarDealerDbContext context;
         private readonly IMapper mapper;
-        private IVehicleRepository _repository;
+        private IVehicleRepository _vehicleRepository;
 
-        public VehicleController(CarDealerDbContext context, IMapper mapper, IVehicleRepository repository)
+        public VehicleController(CarDealerDbContext context, IMapper mapper, IVehicleRepository vehicleRepository)
         {
-            _repository = repository;
+            _vehicleRepository = vehicleRepository;
 
             this.mapper = mapper;
             this.context = context;
@@ -31,7 +31,7 @@ namespace CarDealer.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVehicle(int id)
         {
-            var vehicle = await _repository.GetById(id, true);
+            var vehicle = await _vehicleRepository.GetById(id, true);
 
             if (vehicle == null)
             {
@@ -65,11 +65,11 @@ namespace CarDealer.Controllers
             var vehicle = mapper.Map<SaveVehicleDto, Vehicle>(saveVehicleDto);
 
             // vehicle.LastUpdate = DateTime.Now;
-            await _repository.Create(vehicle);
+            await _vehicleRepository.Create(vehicle);
 
             await context.SaveChangesAsync();
 
-            vehicle = await _repository.GetById(vehicle.Id, true);
+            vehicle = await _vehicleRepository.GetById(vehicle.Id, true);
 
             var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
 
@@ -84,7 +84,7 @@ namespace CarDealer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var vehicle = await _repository.GetById(id, true);
+            var vehicle = await _vehicleRepository.GetById(id, true);
 
             if (vehicle == null)
             {
@@ -105,14 +105,14 @@ namespace CarDealer.Controllers
         public async Task<IActionResult> DeleteVehicle(int id)
         {
 
-            var vehicle = await _repository.GetById(id);
+            var vehicle = await _vehicleRepository.GetById(id);
 
             if (vehicle == null)
             {
                 return NotFound();
             }
 
-            await _repository.Delete(vehicle.Id);
+            await _vehicleRepository.Delete(vehicle.Id);
 
             await context.SaveChangesAsync();
 
