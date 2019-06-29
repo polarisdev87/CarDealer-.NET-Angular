@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace CarDealer.Core
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
+
+        Task Complete();
+
     }
 }
