@@ -16,14 +16,13 @@ namespace CarDealer.Controllers
     [Route("/api/vehicles")]
     public class VehicleController : Controller
     {
-        private readonly CarDealerDbContext context;
         private readonly IMapper mapper;
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IModelRepository _modelRepository;
 
-        public VehicleController(CarDealerDbContext context, IMapper mapper, IVehicleRepository vehicleRepository, IModelRepository modelRepository, IUnitOfWork unitOfWork)
+        public VehicleController(IMapper mapper, IVehicleRepository vehicleRepository, IModelRepository modelRepository, IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
 
@@ -31,7 +30,6 @@ namespace CarDealer.Controllers
             _modelRepository = modelRepository;
 
             this.mapper = mapper;
-            this.context = context;
 
         }
 
@@ -75,7 +73,7 @@ namespace CarDealer.Controllers
             // vehicle.LastUpdate = DateTime.Now;
             await _vehicleRepository.Create(vehicle);
 
-            await context.SaveChangesAsync();
+            await _unitOfWork.Complete();
 
             vehicle = await _vehicleRepository.GetById(vehicle.Id, true);
 
@@ -101,7 +99,7 @@ namespace CarDealer.Controllers
 
             mapper.Map(saveVehicleDto, vehicle);
 
-            await context.SaveChangesAsync();
+            await _unitOfWork.Complete();
 
             var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
 
@@ -122,7 +120,7 @@ namespace CarDealer.Controllers
 
             await _vehicleRepository.Delete(vehicle.Id);
 
-            await context.SaveChangesAsync();
+            await _unitOfWork.Complete();
 
             return Ok(id);
 
