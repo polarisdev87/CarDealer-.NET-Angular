@@ -112,6 +112,8 @@ namespace CarDealer.Controllers
 
             await _unitOfWork.Complete();
 
+            vehicle = await _vehicleRepository.GetById(vehicle.Id);
+
             var result = _mapper.Map<Vehicle, VehicleDto>(vehicle);
 
             return Ok(result);
