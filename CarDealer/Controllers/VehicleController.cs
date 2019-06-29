@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CarDealer.Core;
 using CarDealer.Core.Domain;
 using CarDealer.Core.Dto;
 using CarDealer.Core.Repositories;
@@ -17,11 +18,15 @@ namespace CarDealer.Controllers
     {
         private readonly CarDealerDbContext context;
         private readonly IMapper mapper;
-        private IVehicleRepository _vehicleRepository;
-        private IModelRepository _modelRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public VehicleController(CarDealerDbContext context, IMapper mapper, IVehicleRepository vehicleRepository, IModelRepository modelRepository)
+        private readonly IVehicleRepository _vehicleRepository;
+        private readonly IModelRepository _modelRepository;
+
+        public VehicleController(CarDealerDbContext context, IMapper mapper, IVehicleRepository vehicleRepository, IModelRepository modelRepository, IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
+
             _vehicleRepository = vehicleRepository;
             _modelRepository = modelRepository;
 
