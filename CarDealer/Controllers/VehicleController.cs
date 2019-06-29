@@ -56,7 +56,8 @@ namespace CarDealer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var model = await context.Models.FindAsync(saveVehicleDto.ModelId);
+            var model = await _modelRepository.GetById(saveVehicleDto.ModelId);
+
             if (model == null)
             {
                 ModelState.AddModelError("ModelId", "Invalid ModelId");
