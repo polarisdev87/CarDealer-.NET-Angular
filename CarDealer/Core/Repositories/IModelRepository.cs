@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarDealer.Core.Domain;
 
 namespace CarDealer.Core.Repositories
 {
-    interface IModelRepository
+    public interface IModelRepository : IRepository<Model>
     {
     }
 }
