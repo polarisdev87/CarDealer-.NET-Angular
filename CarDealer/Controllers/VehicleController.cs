@@ -65,7 +65,7 @@ namespace CarDealer.Controllers
             var vehicle = mapper.Map<SaveVehicleDto, Vehicle>(saveVehicleDto);
 
             // vehicle.LastUpdate = DateTime.Now;
-            _repository.Create(vehicle);
+            await _repository.Create(vehicle);
 
             await context.SaveChangesAsync();
 
@@ -112,7 +112,7 @@ namespace CarDealer.Controllers
                 return NotFound();
             }
 
-            _repository.Delete(vehicle.Id);
+            await _repository.Delete(vehicle.Id);
 
             await context.SaveChangesAsync();
 
