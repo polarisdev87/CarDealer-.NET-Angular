@@ -18,10 +18,12 @@ namespace CarDealer.Controllers
         private readonly CarDealerDbContext context;
         private readonly IMapper mapper;
         private IVehicleRepository _vehicleRepository;
+        private IModelRepository _modelRepository;
 
-        public VehicleController(CarDealerDbContext context, IMapper mapper, IVehicleRepository vehicleRepository)
+        public VehicleController(CarDealerDbContext context, IMapper mapper, IVehicleRepository vehicleRepository, IModelRepository modelRepository)
         {
             _vehicleRepository = vehicleRepository;
+            _modelRepository = modelRepository;
 
             this.mapper = mapper;
             this.context = context;
