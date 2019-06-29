@@ -9,5 +9,11 @@ namespace CarDealer.Infrastructure.Repositories
 {
     public class ModelRepository : Repository<Model>, IModelRepository
     {
+
+        public ModelRepository(CarDealerDbContext context)
+            : base(context)
+        {
+        }
+
     }
 }
