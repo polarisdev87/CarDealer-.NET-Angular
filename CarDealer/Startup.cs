@@ -1,4 +1,5 @@
 using AutoMapper;
+using CarDealer.Core;
 using CarDealer.Core.Repositories;
 using CarDealer.Infrastructure;
 using CarDealer.Infrastructure.Repositories;
@@ -27,6 +28,7 @@ namespace CarDealer
         {
 
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
             services.AddAutoMapper();
