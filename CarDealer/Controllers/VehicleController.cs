@@ -16,22 +16,33 @@ namespace CarDealer.Controllers
     [Route("/api/vehicles")]
     public class VehicleController : Controller
     {
-        private readonly IMapper mapper;
+        #region Fields
         private readonly IUnitOfWork _unitOfWork;
 
+        private readonly IMapper _mapper;
+        
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IModelRepository _modelRepository;
+        #endregion
 
-        public VehicleController(IMapper mapper, IVehicleRepository vehicleRepository, IModelRepository modelRepository, IUnitOfWork unitOfWork)
+        #region Constructor
+        public VehicleController(
+            IUnitOfWork unitOfWork,
+
+            IMapper mapper, 
+
+            IVehicleRepository vehicleRepository, 
+            IModelRepository modelRepository 
+        )
         {
             _unitOfWork = unitOfWork;
 
+            _mapper = mapper;
+
             _vehicleRepository = vehicleRepository;
             _modelRepository = modelRepository;
-
-            this.mapper = mapper;
-
         }
+        #endregion
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVehicle(int id)
@@ -43,7 +54,7 @@ namespace CarDealer.Controllers
                 return NotFound();
             }
 
-            var vehicleDto = mapper.Map<Vehicle, VehicleDto>(vehicle);
+            var vehicleDto = _mapper.Map<Vehicle, VehicleDto>(vehicle);
 
             return Ok(vehicleDto);
         }
@@ -68,7 +79,7 @@ namespace CarDealer.Controllers
             }
 
 
-            var vehicle = mapper.Map<SaveVehicleDto, Vehicle>(saveVehicleDto);
+            var vehicle = _mapper.Map<SaveVehicleDto, Vehicle>(saveVehicleDto);
 
             // vehicle.LastUpdate = DateTime.Now;
             await _vehicleRepository.Create(vehicle);
@@ -77,7 +88,7 @@ namespace CarDealer.Controllers
 
             vehicle = await _vehicleRepository.GetById(vehicle.Id, true);
 
-            var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
+            var result = _mapper.Map<Vehicle, VehicleDto>(vehicle);
 
             return Ok(result);
         }
@@ -97,11 +108,11 @@ namespace CarDealer.Controllers
                 return NotFound();
             }
 
-            mapper.Map(saveVehicleDto, vehicle);
+            _mapper.Map(saveVehicleDto, vehicle);
 
             await _unitOfWork.Complete();
 
-            var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
+            var result = _mapper.Map<Vehicle, VehicleDto>(vehicle);
 
             return Ok(result);
         }
