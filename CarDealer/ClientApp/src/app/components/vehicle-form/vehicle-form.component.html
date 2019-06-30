@@ -34,7 +34,7 @@
     </h2>
     <div *ngFor="let feature of features" class="checkbox">
       <label for="feature_{{ feature.id }}">
-          <input type="checkbox" id="feature_{{ feature.id }}" /> {{ feature.name }}
+          <input type="checkbox" id="feature_{{ feature.id }}" (change)="onFeatureToggle(feature.id, $event)" /> {{ feature.name }}
       </label>      
     </div>
 
