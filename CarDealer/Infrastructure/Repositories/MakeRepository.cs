@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CarDealer.Core.Domain;
 using CarDealer.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarDealer.Infrastructure.Repositories
 {
@@ -14,6 +15,11 @@ namespace CarDealer.Infrastructure.Repositories
             : base(context)
         {
 
+        }
+
+        public async Task<List<Make>> GetAllMakesWithModelsAsync()
+        {
+            return await _context.Makes.Include(m => m.Models).ToListAsync();
         }
 
     }
