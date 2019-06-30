@@ -9,6 +9,8 @@ namespace CarDealer.Core.Repositories
     {
         IQueryable<TEntity> GetAll();
 
+        Task<IQueryable<TEntity>> GetAllAsync();
+
         Task<TEntity> GetById(int id);
 
         Task Create(TEntity entity);
