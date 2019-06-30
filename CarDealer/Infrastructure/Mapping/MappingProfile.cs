@@ -1,12 +1,9 @@
-﻿    using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-    using AutoMapper;
-    using CarDealer.Core.Domain;
-    using CarDealer.Core.Dto;
+﻿using System.Linq;
+using AutoMapper;
+using CarDealer.Core.Domain;
+using CarDealer.Core.Dto;
 
-    namespace CarDealer.Infrastructure.Mapping
+namespace CarDealer.Infrastructure.Mapping
 {
     public class MappingProfile : Profile
     {
