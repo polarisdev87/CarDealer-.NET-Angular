@@ -28,6 +28,7 @@ namespace CarDealer
         {
 
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IFeatureRepository, FeatureRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
