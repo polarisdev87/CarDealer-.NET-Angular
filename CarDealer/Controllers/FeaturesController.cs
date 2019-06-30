@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CarDealer.Core;
 using CarDealer.Core.Domain;
 using CarDealer.Core.Dto;
+using CarDealer.Core.Repositories;
 using CarDealer.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,16 +16,28 @@ namespace CarDealer.Controllers
     [ApiController]
     public class FeaturesController : ControllerBase
     {
+        #region Fields
+
+        private readonly IUnitOfWork _unitOfWork;
+
+        private readonly IMapper _mapper;
+
+        private readonly IFeatureRepository _featureRepository;
+
         private readonly CarDealerDbContext context;
-        private readonly IMapper mapper;
+        
+        #endregion
 
-        public FeaturesController(CarDealerDbContext context, IMapper mapper)
+        #region Constructor
+        public FeaturesController(CarDealerDbContext context, IUnitOfWork unitOfWork, IMapper mapper, IFeatureRepository featureRepository)
         {
-
-            this.mapper = mapper;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+            _featureRepository = featureRepository;
             this.context = context;
 
         }
+        #endregion
 
 
         [HttpGet("/api/features")]
@@ -31,7 +45,7 @@ namespace CarDealer.Controllers
         {
             var features = await context.Features.ToListAsync();
 
-            return mapper.Map<List<Feature>, List<KeyValuePairDto>>(features);
+            return _mapper.Map<List<Feature>, List<KeyValuePairDto>>(features);
         }
 
     }
