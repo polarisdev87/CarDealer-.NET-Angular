@@ -47,19 +47,19 @@
         <label for="contactName">
           Name
         </label>
-        <input type="text" id="contactName" class="form-control" />
+        <input type="text" id="contactName" class="form-control" [(ngModel)]="vehicle.contact.name" name="contactName" />
     </div>
     <div class="form-group">
         <label for="contactPhone">
           Phone
         </label>
-        <input type="text" id="contactPhone" class="form-control" />
+        <input type="text" id="contactPhone" class="form-control" [(ngModel)]="vehicle.contact.phone" name="contactPhone" />
     </div>
     <div class="form-group">
         <label for="contactEmail">
           Email
         </label>
-        <input type="text" id="contactEmail" class="form-control" />
+        <input type="text" id="contactEmail" class="form-control" [(ngModel)]="vehicle.contact.email" name="contactEmail" />
     </div>
 
 
