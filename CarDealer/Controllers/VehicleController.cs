@@ -79,7 +79,7 @@ namespace CarDealer.Controllers
             // vehicle.LastUpdate = DateTime.Now;
             await _vehicleRepository.Create(vehicle);
 
-            await _unitOfWork.Complete();
+            await _unitOfWork.CompleteAsync();
 
             vehicle = await _vehicleRepository.GetById(vehicle.Id, true);
 
@@ -105,7 +105,7 @@ namespace CarDealer.Controllers
 
             _mapper.Map(saveVehicleDto, vehicle);
 
-            await _unitOfWork.Complete();
+            await _unitOfWork.CompleteAsync();
 
             vehicle = await _vehicleRepository.GetById(vehicle.Id);
 
@@ -128,7 +128,7 @@ namespace CarDealer.Controllers
 
             await _vehicleRepository.Delete(vehicle.Id);
 
-            await _unitOfWork.Complete();
+            await _unitOfWork.CompleteAsync();
 
             return Ok(id);
 

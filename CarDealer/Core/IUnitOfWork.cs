@@ -8,7 +8,8 @@ namespace CarDealer.Core
     public interface IUnitOfWork
     {
 
-        Task Complete();
+        void Complete();
+        Task CompleteAsync();
 
     }
 }
