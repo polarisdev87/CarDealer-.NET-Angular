@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarDealer.Core;
 using CarDealer.Core.Domain;
 using CarDealer.Core.Dto;
 using CarDealer.Core.Repositories;
-using CarDealer.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CarDealer.Controllers
 {
