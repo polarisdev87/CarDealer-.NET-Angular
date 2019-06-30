@@ -35,4 +35,9 @@ export class VehicleFormComponent implements OnInit {
     
   }
 
+
+  onFeatureToggle(featureId, $event) {
+
+  }
+
 }
