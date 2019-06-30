@@ -24,17 +24,15 @@ namespace CarDealer.Controllers
 
         private readonly IFeatureRepository _featureRepository;
 
-        private readonly CarDealerDbContext context;
         
         #endregion
 
         #region Constructor
-        public FeaturesController(CarDealerDbContext context, IUnitOfWork unitOfWork, IMapper mapper, IFeatureRepository featureRepository)
+        public FeaturesController(IUnitOfWork unitOfWork, IMapper mapper, IFeatureRepository featureRepository)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _featureRepository = featureRepository;
-            this.context = context;
 
         }
         #endregion
