@@ -23,6 +23,11 @@ namespace CarDealer.Infrastructure.Repositories
             return _context.Set<TEntity>().AsNoTracking();
         }
 
+        public Task<List<TEntity>> GetAllAsync()
+        {
+            return _context.Set<TEntity>().ToListAsync();
+        }
+
         public virtual async Task<TEntity> GetById(int id)
         {
             return await _context.Set<TEntity>().FindAsync(id);
