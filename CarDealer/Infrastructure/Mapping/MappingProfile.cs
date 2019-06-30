@@ -15,9 +15,10 @@ using System.Threading.Tasks;
         {
             // Domain to Dto
             CreateMap<Make, MakeDto>();
-            CreateMap<Model, ModelDto>();
-            CreateMap<Feature, FeatureDto>();
-            CreateMap<Vehicle, VehicleDto>()
+            CreateMap<Make, KeyValuePairDto>();
+            CreateMap<Model, KeyValuePairDto>();
+            CreateMap<Feature, KeyValuePairDto>();
+            CreateMap<Vehicle, SaveVehicleDto>()
                 .ForMember(vdto => vdto.Contact,
                     opt => opt.MapFrom(v => new ContactDto
                         { Name = v.ContactName, Phone = v.ContactPhone, Email = v.ContactEmail }))
@@ -25,8 +26,21 @@ using System.Threading.Tasks;
                 .ForMember(vdto => vdto.Features, opt => opt.MapFrom(v => v.Features.Select(vf => vf.FeatureId)));
 
 
+
+
+            CreateMap<Vehicle, VehicleDto>()
+                .ForMember(vr => vr.Make, opt => opt.MapFrom(v => v.Model.Make))
+                .ForMember(vdto => vdto.Contact,
+                    opt => opt.MapFrom(v => new ContactDto
+                        { Name = v.ContactName, Phone = v.ContactPhone, Email = v.ContactEmail }))
+
+                .ForMember(vdto => vdto.Features, opt => opt.MapFrom(v => v.Features.Select(vf => new KeyValuePairDto{ Id = vf.Feature.Id, Name = vf.Feature.Name })));
+
+
+
+
             // Dto to Domain
-            CreateMap<VehicleDto, Vehicle>()
+            CreateMap<SaveVehicleDto, Vehicle>()
                 .ForMember(v => v.Id, opt => opt.Ignore())
                 .ForMember(v => v.ContactName, opt => opt.MapFrom(vdto => vdto.Contact.Name))
                 .ForMember(v => v.ContactEmail, opt => opt.MapFrom(vdto => vdto.Contact.Email))

@@ -27,11 +27,11 @@ namespace CarDealer.Controllers
 
 
         [HttpGet("/api/features")]
-        public async Task<IEnumerable<FeatureDto>> GetFeatures()
+        public async Task<IEnumerable<KeyValuePairDto>> GetFeatures()
         {
             var features = await context.Features.ToListAsync();
 
-            return mapper.Map<List<Feature>, List<FeatureDto>>(features);
+            return mapper.Map<List<Feature>, List<KeyValuePairDto>>(features);
         }
 
     }

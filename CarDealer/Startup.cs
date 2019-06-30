@@ -1,5 +1,8 @@
 using AutoMapper;
+using CarDealer.Core;
+using CarDealer.Core.Repositories;
 using CarDealer.Infrastructure;
+using CarDealer.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +26,11 @@ namespace CarDealer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
             services.AddAutoMapper();
 
             services.AddDbContext<CarDealerDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:Default"]));

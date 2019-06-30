@@ -8,28 +8,21 @@ using CarDealer.Core.Domain;
 
 namespace CarDealer.Core.Dto
 {
-    public class VehicleDto
+    public class SaveVehicleDto
     {
-
         public int Id { get; set; }
-
-        public KeyValuePairDto Model { get; set; }
-        public KeyValuePairDto Make { get; set; }
+        public int ModelId { get; set; }
 
         public bool IsRegistered { get; set; }
 
-
+        [Required]
         public ContactDto Contact { get; set; }
 
-        public DateTime LastUpdate { get; set; }
+        public ICollection<int> Features { get; set; }
 
-        public ICollection<KeyValuePairDto> Features { get; set; }
-
-
-        public VehicleDto()
+        public SaveVehicleDto()
         {
-            Features = new Collection<KeyValuePairDto>();
+            Features = new Collection<int>();
         }
-
     }
 }

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CarDealer.Core;
 using CarDealer.Core.Domain;
 using CarDealer.Core.Dto;
+using CarDealer.Core.Repositories;
 using CarDealer.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,28 +16,45 @@ namespace CarDealer.Controllers
     [Route("/api/vehicles")]
     public class VehicleController : Controller
     {
-        private readonly CarDealerDbContext context;
-        private readonly IMapper mapper;
+        #region Fields
+        private readonly IUnitOfWork _unitOfWork;
 
-        public VehicleController(CarDealerDbContext context, IMapper mapper)
+        private readonly IMapper _mapper;
+        
+        private readonly IVehicleRepository _vehicleRepository;
+        private readonly IModelRepository _modelRepository;
+        #endregion
+
+        #region Constructor
+        public VehicleController(
+            IUnitOfWork unitOfWork,
+
+            IMapper mapper, 
+
+            IVehicleRepository vehicleRepository, 
+            IModelRepository modelRepository 
+        )
         {
+            _unitOfWork = unitOfWork;
 
-            this.mapper = mapper;
-            this.context = context;
+            _mapper = mapper;
 
+            _vehicleRepository = vehicleRepository;
+            _modelRepository = modelRepository;
         }
+        #endregion
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVehicle(int id)
         {
-            var vehicle = await context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
+            var vehicle = await _vehicleRepository.GetById(id, true);
 
             if (vehicle == null)
             {
                 return NotFound();
             }
 
-            var vehicleDto = mapper.Map<Vehicle, VehicleDto>(vehicle);
+            var vehicleDto = _mapper.Map<Vehicle, VehicleDto>(vehicle);
 
             return Ok(vehicleDto);
         }
@@ -43,7 +62,7 @@ namespace CarDealer.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateVehicle([FromBody] VehicleDto vehicleDto)
+        public async Task<IActionResult> CreateVehicle([FromBody] SaveVehicleDto saveVehicleDto)
         {
 
             if (!ModelState.IsValid)
@@ -51,7 +70,8 @@ namespace CarDealer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var model = await context.Models.FindAsync(vehicleDto.ModelId);
+            var model = await _modelRepository.GetById(saveVehicleDto.ModelId);
+
             if (model == null)
             {
                 ModelState.AddModelError("ModelId", "Invalid ModelId");
@@ -59,38 +79,42 @@ namespace CarDealer.Controllers
             }
 
 
-            var vehicle = mapper.Map<VehicleDto, Vehicle>(vehicleDto);
+            var vehicle = _mapper.Map<SaveVehicleDto, Vehicle>(saveVehicleDto);
 
             // vehicle.LastUpdate = DateTime.Now;
+            await _vehicleRepository.Create(vehicle);
 
-            context.Vehicles.Add(vehicle);
-            await context.SaveChangesAsync();
+            await _unitOfWork.Complete();
 
-            var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
+            vehicle = await _vehicleRepository.GetById(vehicle.Id, true);
+
+            var result = _mapper.Map<Vehicle, VehicleDto>(vehicle);
 
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateVehicle(int id, [FromBody] VehicleDto vehicleDto)
+        public async Task<IActionResult> UpdateVehicle(int id, [FromBody] SaveVehicleDto saveVehicleDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var vehicle = await context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
+            var vehicle = await _vehicleRepository.GetById(id, true);
 
             if (vehicle == null)
             {
                 return NotFound();
             }
 
-            mapper.Map(vehicleDto, vehicle);
+            _mapper.Map(saveVehicleDto, vehicle);
 
-            await context.SaveChangesAsync();
+            await _unitOfWork.Complete();
 
-            var result = mapper.Map<Vehicle, VehicleDto>(vehicle);
+            vehicle = await _vehicleRepository.GetById(vehicle.Id);
+
+            var result = _mapper.Map<Vehicle, VehicleDto>(vehicle);
 
             return Ok(result);
         }
@@ -100,16 +124,16 @@ namespace CarDealer.Controllers
         public async Task<IActionResult> DeleteVehicle(int id)
         {
 
-            var vehicle = await context.Vehicles.FindAsync(id);
+            var vehicle = await _vehicleRepository.GetById(id);
 
             if (vehicle == null)
             {
                 return NotFound();
             }
 
-            context.Remove(vehicle);
+            await _vehicleRepository.Delete(vehicle.Id);
 
-            await context.SaveChangesAsync();
+            await _unitOfWork.Complete();
 
             return Ok(id);
 
