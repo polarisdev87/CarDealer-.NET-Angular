@@ -13,7 +13,7 @@
 
     <div class="form-group">
       <label for="model">Model</label>
-      <select id="model" class="form-control" [(ngModel)]="vehicle.modelId">
+      <select id="model" class="form-control" [(ngModel)]="vehicle.modelId" name="modelId">
         <option value=""></option>
         <option *ngFor="let model of models" value="{{ model.id }}">{{ model.name }}</option>
       </select>
@@ -22,10 +22,10 @@
 
     <p>Is vehicle registered?</p>
     <label for="registered" class="radio-inline">
-        <input type="radio" id="registered" name="isRegistered" value="true"> Yes
+        <input type="radio" id="registered" name="isRegistered" value="true" [(ngModel)]="vehicle.isRegistered"> Yes
     </label>
     <label for="notRegistered" class="radio-inline">
-        <input type="radio" id="notRegistered" name="isRegistered" value="false"> No
+        <input type="radio" id="notRegistered" name="isRegistered" value="false" [(ngModel)]="vehicle.isRegistered"> No
     </label>
 
 
