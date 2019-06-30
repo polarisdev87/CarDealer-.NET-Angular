@@ -1,37 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using CarDealer.Core;
 using CarDealer.Core.Domain;
 using CarDealer.Core.Dto;
-using CarDealer.Infrastructure;
+using CarDealer.Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace CarDealer.Controllers
 {
     [ApiController]
     public class FeaturesController : ControllerBase
     {
-        private readonly CarDealerDbContext context;
-        private readonly IMapper mapper;
+        #region Fields
 
-        public FeaturesController(CarDealerDbContext context, IMapper mapper)
+        private readonly IUnitOfWork _unitOfWork;
+
+        private readonly IMapper _mapper;
+
+        private readonly IFeatureRepository _featureRepository;
+
+        
+        #endregion
+
+        #region Constructor
+        public FeaturesController(IUnitOfWork unitOfWork, IMapper mapper, IFeatureRepository featureRepository)
         {
-
-            this.mapper = mapper;
-            this.context = context;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+            _featureRepository = featureRepository;
 
         }
+        #endregion
 
 
         [HttpGet("/api/features")]
         public async Task<IEnumerable<KeyValuePairDto>> GetFeatures()
         {
-            var features = await context.Features.ToListAsync();
+            var features = await _featureRepository.GetAllAsync();
 
-            return mapper.Map<List<Feature>, List<KeyValuePairDto>>(features);
+            return _mapper.Map<List<Feature>, List<KeyValuePairDto>>(features);
         }
 
     }

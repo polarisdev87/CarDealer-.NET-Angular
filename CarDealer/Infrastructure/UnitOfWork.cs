@@ -16,8 +16,13 @@ namespace CarDealer.Infrastructure
             _context = context;
         }
 
+        public void Complete()
+        {
+            _context.SaveChanges();
+        }
 
-        public async Task Complete()
+
+        public async Task CompleteAsync()
         {
             await _context.SaveChangesAsync();
         }
