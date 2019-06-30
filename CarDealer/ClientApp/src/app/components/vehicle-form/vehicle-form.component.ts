@@ -31,6 +31,7 @@ export class VehicleFormComponent implements OnInit {
     
     var selectedMake = this.makes.find(m => m.id == this.vehicle.makeId);
     this.models = selectedMake ? selectedMake.models : [];
+    delete this.vehicle.modelId;
     
   }
 
