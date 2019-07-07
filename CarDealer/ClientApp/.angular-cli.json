@@ -19,10 +19,12 @@
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/ng2-toasty/bundles/style-bootstrap.css",
         "styles.css"
       ],
       "scripts": [
-        "../node_modules/bootstrap/dist/js/bootstrap.js"
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "../node_modules/ng2-toasty/index.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
