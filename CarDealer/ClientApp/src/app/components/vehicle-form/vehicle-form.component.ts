@@ -1,5 +1,6 @@
 import { VehicleService } from '../../services/vehicle.service';
 import { Component, OnInit } from '@angular/core';
+import { ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'app-vehicle-form',
@@ -17,7 +18,9 @@ export class VehicleFormComponent implements OnInit {
   };
 
   constructor(
-    private vehicleService: VehicleService) { }
+    private vehicleService: VehicleService,
+    private toastyService: ToastyService) { }
+    
 
   ngOnInit() {
 
@@ -51,7 +54,7 @@ export class VehicleFormComponent implements OnInit {
 
   submit() {
     this.vehicleService.create(this.vehicle)
-        .subscribe(x => console.log(x));
+      .subscribe(x => console.log(x));
   }
 
 }
