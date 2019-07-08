@@ -38,6 +38,11 @@ export class VehicleFormComponent implements OnInit {
 
   ngOnInit() {
 
+    this.vehicleService.getVehicle(this.vehicle.id)
+      .subscribe(v => {
+        this.vehicle = v;
+      });
+
     this.vehicleService.getMakes().subscribe(
       makes => this.makes = makes);
 
