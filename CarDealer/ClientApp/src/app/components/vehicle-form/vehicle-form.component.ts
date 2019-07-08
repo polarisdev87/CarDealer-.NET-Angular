@@ -41,6 +41,9 @@ export class VehicleFormComponent implements OnInit {
     this.vehicleService.getVehicle(this.vehicle.id)
       .subscribe(v => {
         this.vehicle = v;
+      }, err => {
+        if(err.status == 404)
+          this.router.navigate(['']);
       });
 
     this.vehicleService.getMakes().subscribe(
