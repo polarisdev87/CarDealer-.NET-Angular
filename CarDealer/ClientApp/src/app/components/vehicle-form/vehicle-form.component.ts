@@ -1,5 +1,6 @@
 import { VehicleService } from '../../services/vehicle.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 
 @Component({
@@ -18,6 +19,13 @@ export class VehicleFormComponent implements OnInit {
   };
 
   constructor(
+
+    // Read Route Paramters
+    private route: ActivatedRoute,
+
+    // Navigate if Id is invalid
+    private router: Router,
+
     private vehicleService: VehicleService,
     private toastyService: ToastyService) { }
     
