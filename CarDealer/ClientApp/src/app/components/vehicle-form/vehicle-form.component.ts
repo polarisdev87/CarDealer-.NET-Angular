@@ -19,7 +19,6 @@ export class VehicleFormComponent implements OnInit {
   };
 
   constructor(
-
     // Read Route Paramters
     private route: ActivatedRoute,
 
@@ -27,7 +26,14 @@ export class VehicleFormComponent implements OnInit {
     private router: Router,
 
     private vehicleService: VehicleService,
-    private toastyService: ToastyService) { }
+    private toastyService: ToastyService) {
+
+
+    route.params.subscribe(p => {
+      this.vehicle.id = +p['id'];
+    });
+
+  }
     
 
   ngOnInit() {
