@@ -33,7 +33,8 @@ import AppErrorHandler = Apperrorhandler.AppErrorHandler;
     ToastyModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'vehicles/new', component: VehicleFormComponent }
+      { path: 'vehicles/new', component: VehicleFormComponent },
+      { path: 'vehicles/:id', component: VehicleFormComponent }
     ])
   ],
   providers: [
