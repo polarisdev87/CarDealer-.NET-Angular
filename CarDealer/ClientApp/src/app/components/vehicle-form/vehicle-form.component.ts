@@ -1,5 +1,6 @@
 import { VehicleService } from '../../services/vehicle.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 
 @Component({
@@ -18,11 +19,32 @@ export class VehicleFormComponent implements OnInit {
   };
 
   constructor(
+    // Read Route Paramters
+    private route: ActivatedRoute,
+
+    // Navigate if Id is invalid
+    private router: Router,
+
     private vehicleService: VehicleService,
-    private toastyService: ToastyService) { }
+    private toastyService: ToastyService) {
+
+
+    route.params.subscribe(p => {
+      this.vehicle.id = +p['id'];
+    });
+
+  }
     
 
   ngOnInit() {
+
+    this.vehicleService.getVehicle(this.vehicle.id)
+      .subscribe(v => {
+        this.vehicle = v;
+      }, err => {
+        if(err.status == 404)
+          this.router.navigate(['']);
+      });
 
     this.vehicleService.getMakes().subscribe(
       makes => this.makes = makes);
